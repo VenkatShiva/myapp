@@ -1,24 +1,18 @@
 import React, {Component} from 'react';
 import {
-  Dimensions,
   StyleSheet,
   Text,
   View,
-  TextInput,
-  ScrollView,
-  Image
+  Image,
 } from 'react-native';
 import Header from './Header';
 
 export default class Chat extends Component {
-    static navigationOptions = {
-        drawerLabel: 'Profile',
-    };
   render() {
     return (
       <View style={styles.profile}>
-          <Header navigation={this.props.navigation}/>
-          <View style={[styles.appname,styles.center]}>
+          {/* <Header navigation={this.props.navigation}/> */}
+          <View style={[styles.center]}>
             <Text style={styles.text}>My Profile</Text>
           </View>
       </View>

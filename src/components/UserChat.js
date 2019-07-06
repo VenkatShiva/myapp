@@ -16,16 +16,7 @@ export default class Chat extends Component {
       <View style={styles.chat}>
         <View style={styles.body}>
           <ScrollView style={styles.messages}>
-              <Button
-              title="Go to Details... again"
-              onPress={() => {
-                const resetAction = StackActions.reset({
-                  index: 0,
-                  actions: [NavigationActions.navigate({ routeName: 'header', params:{name:"shiva"}})],
-                });
-                this.props.navigation.dispatch(resetAction);
-                }}
-            />
+              <Text>User Chat</Text>
           </ScrollView>
           <View style={[styles.footer,styles.center]}>
               <TextInput style={[styles.input]}
@@ -36,9 +27,9 @@ export default class Chat extends Component {
                 selectionColor= '#aac3e3'
               ></TextInput>
               <TouchableHighlight
-              onPress={()=>null}
-              underlayColor = {null}
-              activeOpacity = {0.2}
+                onPress = {()=>null} 
+                activeOpacity = {0.2}  
+                underlayColor = {null}       
               >
                 <Image
                 source={require('../../assets/images/send.png')}

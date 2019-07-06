@@ -6,20 +6,25 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import { DrawerActions } from 'react-navigation-drawer';
-
+import { StackActions, NavigationActions } from 'react-navigation';
 
 
 export default class Header extends Component {
-  // componentDidMount(){
-  //   console.log(this.props);
-  // }
+  componentDidMount(){
+    console.log('userchat',this.props);
+  }
   render() {
     return (
         <View style={styles.header}>
           <View style={[styles.profilepic,styles.center]}>
-            <TouchableHighlight 
-            onPress={()=> this.props.navigation.dispatch(DrawerActions.openDrawer())}
+            <TouchableHighlight onPress={() => {
+                console.log('foring',this.props)
+                const resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [NavigationActions.navigate({ routeName: 'tabNavigator', params:{name:"Divya"}})],
+                  });
+                  this.props.navigation.dispatch(resetAction);
+            }}
             underlayColor = {null}
             activeOpacity = {0.2}
             >
@@ -30,7 +35,7 @@ export default class Header extends Component {
             </TouchableHighlight>
           </View>
           <View style={[styles.appname,styles.center]}>
-            <Text style={styles.text}>My App</Text>
+            <Text style={styles.text}>My User</Text>
           </View>
         </View>
     );
