@@ -1,15 +1,33 @@
 import React, {Component} from 'react';
+import { PermissionsAndroid } from 'react-native';
+import Contacts from 'react-native-contacts';
 import {
   StyleSheet,
   View,
   Text,
-  TextInput,
   ScrollView,
   Image,
   TouchableHighlight,
-  Button
 } from 'react-native';
 export default class Chat extends Component {
+  componentDidMount(){
+    // PermissionsAndroid.request(
+    //   PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+    //   {
+    //     'title': 'Contacts',
+    //     'message': 'This app would like to view your contacts.'
+    //   }
+    // ).then(() => {
+    //   Contacts.getAll((err, contacts) => {
+    //     if (err === 'denied'){
+    //       alert("Access Denied")
+    //     } else {
+    //       alert("Accepted");
+    //       console.log(contacts);
+    //     }
+    //   })
+    // })
+  }
   render() {
     return (
       <View style={styles.chat}>

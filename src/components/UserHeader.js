@@ -9,16 +9,12 @@ import {
 
 
 export default class Header extends Component {
-  componentDidMount(){
-    console.log('userchat',this.props);
-  }
   render() {
     return (
         <View style={styles.header}>
           <TouchableHighlight style={[styles.profilepic,styles.center]}
             onPress = {() => {
-              console.log('foring',this.props)
-                this.props.navigation.navigate('tabNavigator');
+              this.props.navigation.navigate('tabNavigator');
             }}
             underlayColor = {null}
             activeOpacity = {0.2}

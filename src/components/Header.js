@@ -6,9 +6,6 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import { DrawerActions } from 'react-navigation-drawer';
-
-
 
 export default class Header extends Component {
   render() {
@@ -16,7 +13,7 @@ export default class Header extends Component {
         <View style={styles.header}>
           <View style={[styles.profilepic,styles.center]}>
             <TouchableHighlight 
-            onPress={()=> this.props.navigation.dispatch(DrawerActions.openDrawer())}
+            onPress={()=> this.props.navigation.openDrawer()}
             underlayColor = {null}
             activeOpacity = {0.2}
             >
@@ -27,7 +24,7 @@ export default class Header extends Component {
             </TouchableHighlight>
           </View>
           <View style={[styles.appname,styles.center]}>
-            <Text style={styles.text}>My App</Text>
+            <Text style={styles.text}>MyApp</Text>
           </View>
         </View>
     );
