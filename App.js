@@ -18,14 +18,14 @@ import StackNavigator from './src/components/stackNavigator';
 import Profile from './src/components/Profile';
 import customDrawerContent from './src/components/customDrawerContent';
 
-const deviceWidth = Dimensions.get('window').width;
-const deviceHeight = Dimensions.get('window').height;
+// const deviceWidth = Dimensions.get('window').width;
+// const deviceHeight = Dimensions.get('window').height;
 const MyDrawerNavigator = createDrawerNavigator({
   Chat: {
     screen: StackNavigator,
     navigationOptions:{
       drawerIcon: (<Image
-        source={require('./assets/images/chat.png')}
+        source = {require('./assets/images/chat.png')}
         style={{width: 40, height: 40}}
       />),
       drawerLabel:'Chat'

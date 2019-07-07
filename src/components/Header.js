@@ -11,9 +11,6 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 
 export default class Header extends Component {
-  // componentDidMount(){
-  //   console.log(this.props);
-  // }
   render() {
     return (
         <View style={styles.header}>
@@ -24,8 +21,8 @@ export default class Header extends Component {
             activeOpacity = {0.2}
             >
                 <Image
-                source={require('../../assets/images/app_icon.png')}
-                style={{width: 55, height: 55}}
+                  source={require('../../assets/images/app_icon.png')}
+                  style={{width: 55, height: 55}}
                 />
             </TouchableHighlight>
           </View>

@@ -6,7 +6,6 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
 
 
 export default class Header extends Component {
@@ -16,24 +15,25 @@ export default class Header extends Component {
   render() {
     return (
         <View style={styles.header}>
-          <View style={[styles.profilepic,styles.center]}>
-            <TouchableHighlight onPress={() => {
-                console.log('foring',this.props)
-                const resetAction = StackActions.reset({
-                    index: 0,
-                    actions: [NavigationActions.navigate({ routeName: 'tabNavigator', params:{name:"Divya"}})],
-                  });
-                  this.props.navigation.dispatch(resetAction);
+          <TouchableHighlight style={[styles.profilepic,styles.center]}
+            onPress = {() => {
+              console.log('foring',this.props)
+                this.props.navigation.navigate('tabNavigator');
             }}
             underlayColor = {null}
             activeOpacity = {0.2}
-            >
-                <Image
-                source={require('../../assets/images/app_icon.png')}
-                style={{width: 55, height: 55}}
-                />
-            </TouchableHighlight>
-          </View>
+          >
+            <View style={[styles.profilepic,styles.center,{flexDirection:'row'}]}>
+              <Image
+                source={require('../../assets/images/left.png')}
+                style={{width: 25, height: 20}}
+              /> 
+              <Image
+                source={require('../../assets/images/user.png')}
+                style={{width: 40, height: 40,borderRadius:20}}
+              />
+              </View>
+          </TouchableHighlight>
           <View style={[styles.appname,styles.center]}>
             <Text style={styles.text}>My User</Text>
           </View>
@@ -44,7 +44,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   header:{
-    height: 65,
+    height: 50,
     backgroundColor: "#80b2f2",
     flexDirection: "row",
   },
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     overflow:'hidden',
   },
   appname:{
-    flex: 5,
+    flex: 4,
   },
   text:{
     fontFamily: "LobsterTwo-Bold",

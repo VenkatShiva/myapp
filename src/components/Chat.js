@@ -9,44 +9,27 @@ import {
   TouchableHighlight,
   Button
 } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
 export default class Chat extends Component {
   render() {
     return (
       <View style={styles.chat}>
-        <View style={styles.body}>
           <ScrollView style={styles.messages}>
-              <Button
-              title="Go to Details... again"
-              onPress={() => {
-                const resetAction = StackActions.reset({
-                  index: 0,
-                  actions: [NavigationActions.navigate({ routeName: 'header', params:{name:"shiva"}})],
-                });
-                this.props.navigation.dispatch(resetAction);
-                }}
-            />
-          </ScrollView>
-          <View style={[styles.footer,styles.center]}>
-              <TextInput style={[styles.input]}
-                placeholder = 'type message here..'
-                multiline = {true}
-                placeholderTextColor= "#aac3e3"
-                autoCorrect = {false}
-                selectionColor= '#aac3e3'
-              ></TextInput>
               <TouchableHighlight
-              onPress={()=>null}
-              underlayColor = {null}
-              activeOpacity = {0.2}
+                onPress={() => {
+                  this.props.navigation.navigate('header');
+                }}
               >
-                <Image
-                source={require('../../assets/images/send.png')}
-                style={{width: 51, height: 51, marginLeft: 5}}
-                />
-              </TouchableHighlight>
-          </View>
-        </View>
+              <Text>
+                First User
+              </Text>
+            </TouchableHighlight>
+          </ScrollView>
+          <TouchableHighlight style={styles.addIcon}>
+            <Image
+              source={require('../../assets/images/add.png')}
+              style={{width: 60, height: 60}}
+            />
+          </TouchableHighlight>
       </View>
     );
   }
@@ -55,32 +38,12 @@ export default class Chat extends Component {
 const styles = StyleSheet.create({
   chat:{
       flex:1,
+      overflow:'scroll',
+      position:'relative',
   },
-  center:{
-    alignItems:"flex-end",
-  },
-  body:{
-    overflow:'scroll',
-    flex:1
-  },
-  footer:{
-    marginTop:'auto',
-    height: 'auto',
-    flexDirection:'row',
-    marginBottom: 5,
-    paddingLeft:5,
-    paddingRight:5
-  },
-  input:{
-    height: 'auto',
-    borderColor: '#80b2f2',
-    borderRadius: 25,
-    borderWidth: 1,
-    flex:1,
-    backgroundColor:'white',
-    paddingLeft: 20,
-    fontSize: 20,
-    color: "#2c82f2",
-    maxHeight: 89,
+  addIcon:{
+    position:'absolute',
+    bottom:20,
+    right:20
   }
 });

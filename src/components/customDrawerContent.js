@@ -10,7 +10,7 @@ import { DrawerItems } from "react-navigation";
 export default class customDrawerContent extends Component {
   render() {
     return (
-      <View style={styles.profile}>
+      <View style = {styles.profile}>
           <View style={[styles.drawerHead,styles.center]}>
             <Image
                source={require('../../assets/images/dp.jpg')}
