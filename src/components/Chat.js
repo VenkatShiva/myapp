@@ -11,22 +11,22 @@ import {
 } from 'react-native';
 export default class Chat extends Component {
   componentDidMount(){
-    // PermissionsAndroid.request(
-    //   PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-    //   {
-    //     'title': 'Contacts',
-    //     'message': 'This app would like to view your contacts.'
-    //   }
-    // ).then(() => {
-    //   Contacts.getAll((err, contacts) => {
-    //     if (err === 'denied'){
-    //       alert("Access Denied")
-    //     } else {
-    //       alert("Accepted");
-    //       console.log(contacts);
-    //     }
-    //   })
-    // })
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      {
+        'title': 'Contacts',
+        'message': 'This app would like to view your contacts.'
+      }
+    ).then(() => {
+      Contacts.getAll((err, contacts) => {
+        if (err === 'denied'){
+          alert("Access Denied")
+        } else {
+          //alert("Accepted");
+          console.log(contacts);
+        }
+      })
+    })
   }
   render() {
     return (
@@ -45,7 +45,7 @@ export default class Chat extends Component {
           <TouchableHighlight style={styles.addIcon}>
             <Image
               source={require('../../assets/images/add.png')}
-              style={{width: 60, height: 60}}
+              style={{width: 60, height: 60, borderRadius:30, borderColor:'#3000F4', borderWidth:1}}
             />
           </TouchableHighlight>
       </View>
