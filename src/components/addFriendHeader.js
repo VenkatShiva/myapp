@@ -9,9 +9,9 @@ import {
 
 
 export default class Header extends Component {
-  // componentDidMount(){
-  //   console.log("props",this.props);
-  // }
+//   componentDidMount(){
+//     console.log("props",this.props);
+//   }
   render() {
     return (
         <View style={styles.header}>
@@ -27,14 +27,10 @@ export default class Header extends Component {
                 source={require('../../assets/images/left.png')}
                 style={{width: 20, height: 20}}
               /> 
-              <Image
-                source={require('../../assets/images/user.png')}
-                style={{width: 40, height: 40,borderRadius:20}}
-              />
               </View>
           </TouchableHighlight>
           <View style={[styles.appname,styles.center]}>
-            <Text style={styles.text}>{this.props.navigation.state.params.userName}</Text>
+            <Text style={styles.text}>Choose Friend</Text>
           </View>
         </View>
     );
@@ -43,7 +39,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   header:{
-    height: 50,
+    height: 55,
     backgroundColor: "#80b2f2",
     flexDirection: "row",
   },

@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import { PermissionsAndroid } from 'react-native';
-import Contacts from 'react-native-contacts';
 import {
   StyleSheet,
   View,
@@ -10,39 +8,29 @@ import {
   TouchableHighlight,
 } from 'react-native';
 export default class Chat extends Component {
-  componentDidMount(){
-    PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-      {
-        'title': 'Contacts',
-        'message': 'This app would like to view your contacts.'
-      }
-    ).then(() => {
-      Contacts.getAll((err, contacts) => {
-        if (err === 'denied'){
-          alert("Access Denied")
-        } else {
-          //alert("Accepted");
-          console.log(contacts);
-        }
-      })
-    })
-  }
   render() {
     return (
       <View style={styles.chat}>
           <ScrollView style={styles.messages}>
               <TouchableHighlight
                 onPress={() => {
-                  this.props.navigation.navigate('header');
+                  this.props.navigation.navigate('header',{userName:"Shiva"});
                 }}
+                underlayColor = {null}
+                activeOpacity = {0.2}
               >
               <Text>
-                First User
+                First User of Me
               </Text>
             </TouchableHighlight>
           </ScrollView>
-          <TouchableHighlight style={styles.addIcon}>
+          <TouchableHighlight style={styles.addIcon}
+            onPress={() => {
+              this.props.navigation.navigate('addFriend');
+            }}
+            underlayColor = {null}
+            activeOpacity = {0.2}
+          >
             <Image
               source={require('../../assets/images/add.png')}
               style={{width: 60, height: 60, borderRadius:30, borderColor:'#3000F4', borderWidth:1}}

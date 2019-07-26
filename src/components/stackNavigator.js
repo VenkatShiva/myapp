@@ -9,6 +9,8 @@ import {
 import TabNavigator from './tabNavigator';
 import Header from './Header';
 import UserHeader from './UserHeader';
+import AddFriendHeader from './addFriendHeader';
+import AddFriend from './addFriend';
 import UserChat from './UserChat';
 
 export default createStackNavigator({
@@ -23,12 +25,18 @@ export default createStackNavigator({
         navigationOptions: ({navigation})=>({
             header: <UserHeader navigation={navigation}/>,
         })
+    },
+    addFriend:{
+      screen: AddFriend,
+      navigationOptions: ({navigation})=>({
+        header: <AddFriendHeader navigation={navigation}/>,
+    })
     }
 },{
     transitionConfig:() => {
         return {
           transitionSpec: {
-            duration: 800,
+            duration: 500,
             easing: Easing.out(Easing.poly(4)),
             timing: Animated.timing,
             useNativeDriver: true,
