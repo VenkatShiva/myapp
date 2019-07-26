@@ -7,10 +7,19 @@ import {
   ScrollView,
   Image,
   TouchableHighlight,
-  Button
+  BackHandler,
 } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
 export default class Chat extends Component {
+  // componentDidMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+  // }
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+  // }
+  // onBackButtonPressAndroid = () => {
+  //   this.props.navigation.navigate('tabNavigator');
+  //   return true;
+  // };
   render() {
     return (
       <View style={styles.chat}>

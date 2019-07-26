@@ -13,6 +13,7 @@ import {
   View,
   Image
 } from 'react-native';
+import { connect }  from 'react-redux';
 import { createDrawerNavigator, createAppContainer } from "react-navigation";
 import StackNavigator from './src/components/stackNavigator';
 import Profile from './src/components/Profile';
@@ -65,8 +66,9 @@ const MyDrawerNavigator = createDrawerNavigator({
 });
 
 const MyApp = createAppContainer(MyDrawerNavigator);
-export default class App extends Component {
+class App extends Component {
   render() {
+    console.log("myprops",this.props);
     return (
       <View style={styles.container}>
         <MyApp />
@@ -74,6 +76,12 @@ export default class App extends Component {
     );
   }
 }
+function mapStateToProps(state){
+  return {
+    state :state,
+  }
+}
+export default connect(mapStateToProps,null)(App);
 const styles = StyleSheet.create({
   container:{
     flex:1,
