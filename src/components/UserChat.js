@@ -5,10 +5,14 @@ import {
   Text,
   TextInput,
   ScrollView,
+  FlatList,
   Image,
   TouchableHighlight,
   BackHandler,
+  KeyboardAvoidingView,
+  SafeAreaView
 } from 'react-native';
+import ChatBubble from './chatBubble';
 export default class Chat extends Component {
   // componentDidMount() {
   //   BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
@@ -23,11 +27,30 @@ export default class Chat extends Component {
   render() {
     return (
       <View style={styles.chat}>
-        <View style={styles.body}>
-          <ScrollView style={styles.messages}>
-              <Text>User Chat</Text>
-          </ScrollView>
-          <View style={[styles.footer,styles.center]}>
+          <View style={styles.messages}>
+            <FlatList
+              data={[
+                {type:"friend",text:"I'm fine, thank you. What about you, are you fine? I'm fine, thank you."},
+                {type:"me",text:"Hi, how are you?"},
+                {type:"friend",text:"I'm fine, thank you. What about you, are you fine?"},
+                {type:"me",text:"Hi, how are you?"},
+                {type:"friend",text:"I'm fine, thank you. What about you, are you fine?"},
+                {type:"me",text:"Hi, how are you? What about you, are you fine?"},
+                {type:"friend",text:"I'm fine, thank you. What about you, are you fine? I'm fine, thank you."},
+                {type:"me",text:"Hi, how are you?"},
+                {type:"friend",text:"I'm fine, thank you. What about you, are you fine? I'm fine, thank you. What about you, are you fine?"},
+                {type:"me",text:"Hi, how are you?"},
+                {type:"friend",text:"I'm fine, thank you. What about you, are you fine?"},
+                {type:"me",text:"Hi, how are you?"},
+            ]}
+              keyExtractor={(item, index) => index.toString()}
+              inverted={true}
+              renderItem = {({item,index})=>
+                  <ChatBubble message={item}/>
+            }
+          >
+          </FlatList>
+          <View style={[styles.footer]}>
               <TextInput style={[styles.input]}
                 placeholder = 'type message here..'
                 multiline = {true}
@@ -42,7 +65,7 @@ export default class Chat extends Component {
               >
                 <Image
                 source={require('../../assets/images/send.png')}
-                style={{width: 51, height: 51, marginLeft: 5}}
+                style={{width: 51, height: 51, marginLeft: 5, backgroundColor:"#f7f7f7", borderRadius:30}}
                 />
               </TouchableHighlight>
           </View>
@@ -56,20 +79,23 @@ const styles = StyleSheet.create({
   chat:{
       flex:1,
   },
-  center:{
-    alignItems:"flex-end",
+  messages:{
+    flex:1,
+    height:"auto",
+    backgroundColor:"#dbdbdb"
   },
-  body:{
-    overflow:'scroll',
-    flex:1
+  textMessages:{
+    flex:1,
   },
   footer:{
-    marginTop:'auto',
+    alignSelf:"flex-end",
+    //marginTop:'auto',
     height: 'auto',
     flexDirection:'row',
     marginBottom: 5,
     paddingLeft:5,
-    paddingRight:5
+    paddingRight:5,
+    marginTop:5
   },
   input:{
     height: 'auto',
@@ -77,7 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderWidth: 1,
     flex:1,
-    backgroundColor:'white',
+    backgroundColor:"#f7f7f7",
     paddingLeft: 20,
     fontSize: 20,
     color: "#2c82f2",

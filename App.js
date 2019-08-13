@@ -8,19 +8,22 @@
 
 import React, {Component} from 'react';
 import {
-  Dimensions,
   StyleSheet,
   View,
-  Image
+  Image,
+  Easing,
+  Animated
 } from 'react-native';
 import { connect }  from 'react-redux';
-import { createDrawerNavigator, createAppContainer } from "react-navigation";
+import { createDrawerNavigator,
+   createAppContainer,
+   createStackNavigator,
+} from "react-navigation";
 import StackNavigator from './src/components/stackNavigator';
 import Profile from './src/components/Profile';
 import customDrawerContent from './src/components/customDrawerContent';
+import LoginPage from './src/components/loginPage'
 
-// const deviceWidth = Dimensions.get('window').width;
-// const deviceHeight = Dimensions.get('window').height;
 const MyDrawerNavigator = createDrawerNavigator({
   Chat: {
     screen: StackNavigator,
@@ -64,11 +67,47 @@ const MyDrawerNavigator = createDrawerNavigator({
   },
   drawerBackgroundColor: "#aac3e3"
 });
+const MyStackNavigator  = createStackNavigator({
+  loginPage: {
+      screen: LoginPage,
+  },
+  myApp:{
+      screen: MyDrawerNavigator,
+  },
+  },{
+    headerMode: 'none',
+  transitionConfig:() => {
+      return {
+        transitionSpec: {
+          duration: 500,
+          easing: Easing.out(Easing.poly(4)),
+          timing: Animated.timing,
+          useNativeDriver: true,
+        },
+        screenInterpolator: sceneProps => {      
+          const { layout, position, scene } = sceneProps
+    
+          const thisSceneIndex = scene.index
+          const width = layout.initWidth
+          const opacity = position.interpolate({
+              inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex+1],
+              outputRange: [0, 1, 1],
+            });
+          const translateX = position.interpolate({
+            inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex+1],
+            outputRange: [width, 0, 0],
+          })
+    
+          return { opacity, transform: [ { translateX } ] }
+        },
+      }
+    }
+})
 
-const MyApp = createAppContainer(MyDrawerNavigator);
+const MyApp = createAppContainer(MyStackNavigator);
 class App extends Component {
   render() {
-    console.log("myprops",this.props);
+    // console.log("myprops",this.props);
     return (
       <View style={styles.container}>
         <MyApp />
