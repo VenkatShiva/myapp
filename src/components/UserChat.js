@@ -65,7 +65,7 @@ export default class Chat extends Component {
               >
                 <Image
                 source={require('../../assets/images/send.png')}
-                style={{width: 51, height: 51, marginLeft: 5, backgroundColor:"#f7f7f7", borderRadius:30}}
+                style={{width: 51, height: 51, marginLeft: 5, backgroundColor:"#f5f5f5", borderRadius:30}}
                 />
               </TouchableHighlight>
           </View>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#f7f7f7",
     paddingLeft: 20,
     fontSize: 20,
-    color: "#2c82f2",
+    color: "#f5f5f5",
     maxHeight: 89,
   }
 });
