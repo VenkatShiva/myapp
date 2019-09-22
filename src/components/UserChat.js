@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     backgroundColor:"#f7f7f7",
     paddingLeft: 20,
     fontSize: 20,
-    color: "#f5f5f5",
     maxHeight: 89,
   }
 });

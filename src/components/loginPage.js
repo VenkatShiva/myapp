@@ -3,17 +3,16 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TextInput,
-  TouchableHighlight,
+  TouchableNativeFeedback,
   Dimensions,
-  Picker
+  Picker,
+  KeyboardAvoidingView
 } from 'react-native';
 import {
     NavigationActions,
     StackActions } from "react-navigation";
 import { connect } from "react-redux";
-import LinearGradient from 'react-native-linear-gradient';
 
 import { setMobileNumber } from '../reducers/actions';
 let mobileInputs = [];
@@ -50,7 +49,6 @@ class LoginPage extends Component {
         await this.props.setMobileNumber(this.state.mobileInput);
         this.setState({
             isMobileEntered: true,
-            errorMessage : ""
         });
         mobileInputs[0].focus();
         // console.log(this.props.mobileNumber, this.state.mobileInput);
@@ -62,7 +60,7 @@ class LoginPage extends Component {
       otp = otp.join("");
       if(otp.length != 6) {
         this.setState({
-            errorMessage : "Please enter 6 digits OTP"
+            errorMessage : "Please enter 6 digits pin"
         })
       }
       else if(otp != "123456"){
@@ -87,14 +85,8 @@ class LoginPage extends Component {
     let inputs = Array(6).fill(0);
     //console.log(this.state.otpEntered);
     return (
-        <LinearGradient style={styles.login}
-         colors={['#cce2ff', '#ebf3ff', '#cce2ff']}
-         start={{x: 0, y: 0}}
-         end={{x: 0, y: 1}}
-         >
-            
-            <ScrollView contentContainerStyle={styles.login}
-                keyboardShouldPersistTaps = "always"
+            <KeyboardAvoidingView style={styles.login}
+                behavior="height" enabled
                 >
                 <Text style={styles.welcome}>Welcome to MyApp</Text>
                 <View style={styles.inputField}>
@@ -118,6 +110,14 @@ class LoginPage extends Component {
                             maxLength={10}
                             selectionColor = "#aac3e3"
                             textContentType="telephoneNumber"
+                            onFocus = {()=>{
+                                    if(this.state.errorMessage != ""){
+                                        this.setState({
+                                            errorMessage : ""
+                                        });
+                                    }   
+                                }
+                            }
                             onSubmitEditing = {()=>{
                                     this.submitMobileNumber();
                                 }
@@ -154,7 +154,7 @@ class LoginPage extends Component {
                                                             else 
                                                                 mobileInputs[index+1].focus();
                                                         }
-                                                        else{
+                                                        else if(index > 0){
                                                             mobileInputs[index-1].focus()
                                                         }
                                                     });
@@ -166,10 +166,19 @@ class LoginPage extends Component {
                                                         mobileInputs[index-1].focus();
                                                 }
                                             }}
+                                            textAlign={'center'}
                                             selectionColor = "#aac3e3"
                                             value={this.state.otpEntered[index]?"*":""}
                                             maxLength={1}
                                             selectTextOnFocus={true}
+                                            onFocus = {()=>{
+                                                    if(this.state.errorMessage != ""){
+                                                        this.setState({
+                                                            errorMessage : ""
+                                                        });
+                                                    }
+                                                }
+                                            }
                                             >
                                             </TextInput>
                                         </View>
@@ -178,25 +187,28 @@ class LoginPage extends Component {
                             }
                     </View>
                     <Text style={{color:"red",display: this.state.errorMessage ? "flex":"none"}}>{this.state.errorMessage}</Text>
-                    <TouchableHighlight
-                        onPress={() => {
-                            if(this.state.isMobileEntered){
-                                this.gotoApp();
-                            } else {
-                                this.submitMobileNumber();
-                            } 
-                        }}
-                        underlayColor = "#a1c9ff"
-                        activeOpacity = {0.5}
-                        style={styles.submitNumber}
-                    >
-                    <Text style={{color:"black",fontSize: 16}}>
-                        SUBMIT
-                    </Text>
-                </TouchableHighlight>
+                    <View style={styles.radius}>
+                        <TouchableNativeFeedback
+                            onPress={() => {
+                                if(this.state.isMobileEntered){
+                                    this.gotoApp();
+                                } else {
+                                    this.submitMobileNumber();
+                                } 
+                            }}
+                            background={TouchableNativeFeedback.Ripple( "white", true)}
+                            
+                        >
+                            <View style={styles.submitNumber}>
+                                <Text style={{color:"black",fontSize: 16}}>
+                                    SUBMIT
+                                </Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                        
+                    </View>
                 </View>
-            </ScrollView>
-        </LinearGradient>
+            </KeyboardAvoidingView>
     );
   }
 }
@@ -207,12 +219,13 @@ const mapStateToProps =  state => {
 };
 export default  connect(mapStateToProps,{setMobileNumber})(LoginPage);
 const dimensions = Dimensions.get('window');
-const width = Math.round(dimensions.width*8/10);
+const width = Math.round(dimensions.width*9/10);
 const styles = StyleSheet.create({
   login:{
       flex:1,
       justifyContent:"center",
-      alignItems:"center"
+      alignItems:"center",
+      backgroundColor:"#cce2ff"
   },
   welcome:{
       fontSize:30,
@@ -223,6 +236,7 @@ const styles = StyleSheet.create({
       marginTop:10,
       //  alignItems:"center",
       width,
+      maxWidth: 350,
     //   borderWidth:2,
     //   borderColor:"black",
     //   borderRadius:10,
@@ -236,34 +250,44 @@ const styles = StyleSheet.create({
       backgroundColor:"#f2f7ff"
   },
   numberCode:{
-      flex:5,
+      width: 110,
   },
   numberInput:{
-      flex:10,
+      flex:1,
       fontSize: 18,
   },
   submitNumber:{
       padding:10,
       backgroundColor:"#a1c9ff",
-      marginTop:10,
       borderRadius:10,
-      marginLeft: "auto",
   },
   otpContainer:{
-      flexDirection:"row"
+      flexDirection:"row",
+    //   alignItems:"center"
   },
   otpInput:{
       height: 50,
       borderWidth:1,
       borderRadius:5,
       borderColor:"black",
-      margin:3,
+    //   marginLeft:3,
       backgroundColor:"#f2f7ff",
-      // marginHorizontal:15,
+    //   width:20,
+      marginHorizontal:3,
+      justifyContent:"center",
+      alignItems:"center",
       flex:1
   },
   otpField:{
-      marginLeft:12,
-      fontSize:18,
+      fontSize:20,
+  },
+  radius:{
+      width:"auto",
+      height:"auto",
+      borderRadius:10,
+      marginTop:10,
+      borderWidth:0,
+      borderColor:"black",
+      alignSelf: "flex-end",
   }
 });

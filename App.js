@@ -12,7 +12,8 @@ import {
   View,
   Image,
   Easing,
-  Animated
+  Animated,
+  StatusBar
 } from 'react-native';
 import { connect }  from 'react-redux';
 import { createDrawerNavigator,
@@ -110,6 +111,7 @@ class App extends Component {
     // console.log("myprops",this.props);
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#80b2f2" barStyle="light-content" />
         <MyApp />
       </View>
     );
